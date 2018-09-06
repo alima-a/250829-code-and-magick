@@ -11,9 +11,9 @@ var SHADOW_Y = CLOUD_Y + SHADOW_SHIFT;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
 var GAP = 50;
 var FONT_GAP = 15;
-var TEXT_WIDTH = 50;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
+var BAR_COLOR = 'rgba(255, 0, 0, 1)';
 
 // Функция для рисования облака
 var renderCloud = function (ctx, x, y, color) {
@@ -55,8 +55,14 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], CLOUD_X + GAP * i, CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT));
-    ctx.fillRect(CLOUD_X + GAP + TEXT_WIDTH, CLOUD_Y + GAP + (GAP + BAR_HEIGHT) * i, (BAR_WIDTH * times[i]) / maxTime, BAR_HEIGHT);
+    ctx.fillStyle = '#000';
+    ctx.fillText(names[i], CLOUD_X + (GAP + BAR_WIDTH) * i + GAP, CLOUD_Y + CLOUD_HEIGHT - FONT_GAP * 2);
+
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = BAR_COLOR;
+    } else {
+      ctx.fillStyle = 'hsl(240, ' + getRandomNum(10, 100) + '%' + ', 50%)';
+    }
+    ctx.fillRect(CLOUD_X + (BAR_WIDTH + GAP) * i + GAP, CLOUD_Y + CLOUD_HEIGHT - GAP, BAR_WIDTH, Math.round(-BAR_HEIGHT * times[i] / maxTime));
   }
-  //  Положение колонок и имен все равно чооопопало получается -_-
 };
