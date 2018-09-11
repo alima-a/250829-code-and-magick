@@ -27,22 +27,19 @@ var getRandomElement = function (array) {
 };
 
 // Функция получения массива волшебников
-var getWizards = function (wizardsSum) {
-  var wizards = [];
-
-  for (var i = 0; i < wizardsSum; i++) {
+var wizards = [];
+var generateWizards = function (amount) {
+  for (var i = 0; i < amount; i++) {
     wizards[i] = {
       name: getRandomElement(WIZARDS_NAMES) + ' ' + getRandomElement(WIZARDS_SURNAMES),
       coatColor: getRandomElement(WIZARD_COATS_COLORS),
       eyesColor: getRandomElement(WIZARD_EYES_COLORS)
     };
   }
-
-  return wizards;
 };
 
 // Получаем массив волшебников
-var wizards = getWizards(WIZARDS_SUM);
+generateWizards(WIZARDS_SUM);
 
 // DOM-элемент заполняем данными из массива
 var renderWizard = function (wizard) {
@@ -56,7 +53,7 @@ var renderWizard = function (wizard) {
 };
 
 // Отрисуем сгенерированные DOM-элементы в блок
-var renderWizards = function (wizards) {
+var renderWizards = function () {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < wizards.length; i++) {
     fragment.appendChild(renderWizard(wizards[i]));
