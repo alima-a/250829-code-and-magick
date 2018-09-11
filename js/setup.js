@@ -22,23 +22,23 @@ var getRandomNum = function (min, max) {
 };
 
 // Функция получения рандомного элемента
-var getRandomItem = function (array) {
+var getRandomElement = function (array) {
   return array[getRandomNum(0, array.length - 1)];
 };
 
 // Функция получения массива волшебников
 var getWizards = function (wizardsSum) {
-  var wizardsMassif = [];
+  var wizards = [];
 
   for (var i = 0; i < wizardsSum; i++) {
-    wizardsMassif[i] = {
-      name: getRandomItem(WIZARDS_NAMES) + ' ' + getRandomItem(WIZARDS_SURNAMES),
-      coatColor: getRandomItem(WIZARD_COATS_COLORS),
-      eyesColor: getRandomItem(WIZARD_EYES_COLORS)
+    wizards[i] = {
+      name: getRandomElement(WIZARDS_NAMES) + ' ' + getRandomElement(WIZARDS_SURNAMES),
+      coatColor: getRandomElement(WIZARD_COATS_COLORS),
+      eyesColor: getRandomElement(WIZARD_EYES_COLORS)
     };
   }
 
-  return wizardsMassif;
+  return wizards;
 };
 
 // Получаем массив волшебников
@@ -56,7 +56,15 @@ var renderWizard = function (wizard) {
 };
 
 // Отрисуем сгенерированные DOM-элементы в блок
-// Не совсем понимаю, как тут надо
+var renderWizards = function (wizards) {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  similarListElement.appendChild(fragment);
+};
+
+renderWizards(wizards);
 
 // Делаем видимым блок
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
