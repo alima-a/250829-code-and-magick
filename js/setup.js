@@ -18,7 +18,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 
 // Функция получения рандомного числа от min до max
 var getRandomNum = function (min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // Функция получения рандомного элемента
